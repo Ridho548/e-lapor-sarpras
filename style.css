@@ -785,3 +785,35 @@ body {
     border: 1px solid #000000 !important;
   }
 }
+/* ================= PERBAIKAN POSISI TENGAH HALAMAN LOGIN ================= */
+#login-screen.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 28px 22px;
+}
+
+#login-screen .brand-header,
+#login-screen .login-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#login-screen .role-switcher,
+#login-screen .role-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+#login-screen p:last-child,
+#login-screen .login-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 14px;
+  line-height: 1.4;
+}
