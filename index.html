@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>E-Lapor Sarpras - SMKN 1 Dlanggu</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- ================= HALAMAN 1: LOGIN 1 KELAS 1 AKUN ================= -->
+        <section id="login-screen" class="screen active">
+            <div class="login-header">
+                <div class="app-badge">🏫 SMKN 1 DLANGGU</div>
+                <div class="logo-circle">🛠️</div>
+                <h1>E-Lapor Sarpras</h1>
+                <p>Pelaporan Kerusakan Fasilitas Berbasis Foto & Real-Time</p>
+            </div>
+
+            <form id="login-form" class="card form-card">
+                <div class="role-switch">
+                    <button type="button" class="role-btn active" data-role="kelas">Perwakilan Kelas</button>
+                    <button type="button" class="role-btn" data-role="admin">Admin Sarpras</button>
+                </div>
+
+                <!-- Input Khusus Perwakilan Kelas -->
+                <div id="kelas-fields">
+                    <div class="form-group">
+                        <label for="select-kelas">Pilih Akun Kelas</label>
+                        <select id="select-kelas">
+                            <option value="X RPL 1">X RPL 1 (Akun Resmi Kelas)</option>
+                            <option value="X RPL 2">X RPL 2 (Akun Resmi Kelas)</option>
+                            <option value="XI RPL 1">XI RPL 1 (Akun Resmi Kelas)</option>
+                            <option value="XI RPL 2">XI RPL 2 (Akun Resmi Kelas)</option>
+                            <option value="LAB JARKOM">LAB RPL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-pj">Nama Penginput (Ketua / Sekretaris)</label>
+                        <input type="text" id="input-pj" placeholder="Contoh: Ahmad Fauzi" />
+                    </div>
+                </div>
+
+                <!-- Input Khusus Admin Sarpras -->
+                <div id="admin-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="input-admin-user">Username Petugas</label>
+                        <input type="text" id="input-admin-user" value="admin_sarpras" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-pin">PIN Privat Kelas / Petugas</label>
+                    <input type="password" id="input-pin" placeholder="Masukkan PIN rahasia akun..." required />
+                </div>
+
+                <p id="login-error" class="error-text"></p>
+
+                <button type="submit" class="btn btn-primary btn-full">Masuk ke Aplikasi ➔</button>
+            </form>
+
+            <p class="footer-note">1 Kelas memiliki 1 PIN privat berbeda untuk mencegah laporan ganda.</p>
+        </section>
+
+        <!-- ================= HALAMAN 2: DASHBOARD UTAMA ================= -->
+        <section id="main-screen" class="screen">
+            <header class="top-bar">
+                <div>
+                    <span class="badge-role" id="header-role-badge">AKUN KELAS</span>
+                    <h2 id="header-user-title">X RPL 1</h2>
+                    <small id="header-user-sub">PJ: Ahmad Fauzi</small>
+                </div>
+                <button id="btn-logout" class="btn-icon" title="Keluar Akun">Keluar</button>
+            </header>
+
+            <!-- Kolom Pencarian Cepat (Posisi Paling Atas) -->
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Cari kelas, ruangan, atau kategori..." />
+            </div>
+
+            <!-- Ringkasan Status Real-Time -->
+            <div class="stats-grid">
+
+                <!-- Ringkasan Status Real-Time -->
+                <div class="stats-grid">
+                    <div class="stat-card warning">
+                        <span class="stat-num" id="stat-menunggu">0</span>
+                        <span class="stat-label">Menunggu</span>
+                    </div>
+                    <div class="stat-card info">
+                        <span class="stat-num" id="stat-proses">0</span>
+                        <span class="stat-label">Diproses</span>
+                    </div>
+                    <div class="stat-card success">
+                        <span class="stat-num" id="stat-selesai">0</span>
+                        <span class="stat-label">Selesai</span>
+                    </div>
+                </div>
+
+                <!-- Area Tombol Aksi (Otomatis berganti antara Kelas & Admin) -->
+                <div id="kelas-action-bar" class="action-bar"></div>
+
+                <!-- Filter Status -->
+                <div class="filter-bar">
+                    <button class="chip active" data-status="ALL">Semua</button>
+                    <button class="chip" data-status="Menunggu">Menunggu</button>
+                    <button class="chip" data-status="Diproses">Diproses</button>
+                    <button class="chip" data-status="Selesai">Selesai</button>
+                </div>
+
+                <!-- Daftar Tiket Laporan -->
+                <div class="feed-header">
+                    <h3>📋 Daftar Laporan Real-Time</h3>
+                </div>
+                <div id="report-list" class="report-list"></div>
+        </section>
+
+
+        <!-- ================= MODAL 1: FORM BUAT LAPORAN (FOTO KAMERA) ================= -->
+        <div id="form-modal" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-top">
+                    <h3>📸 Laporkan Kerusakan</h3>
+                    <button type="button" id="btn-close-form" class="close-circle">✕</button>
+                </div>
+
+                <form id="report-form">
+                    <div class="form-group">
+                        <label for="rep-jenis">Jenis Pengajuan</label>
+                        <select id="rep-jenis" required>
+                            <option value="Kerusakan">🛠️ Lapor Kerusakan Fasilitas</option>
+                            <option value="Pemasangan">📌 Bantuan Pemasangan (Kipas / Aksesoris)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rep-kategori">Kategori Fasilitas</label>
+                        <select id="rep-kategori" required>
+                            <option value="🔌 Proyektor & Kelistrikan">🔌 Proyektor & Kelistrikan</option>
+                            <option value="💻 PC & Jaringan Lab">💻 PC & Jaringan Lab</option>
+                            <option value="🪑 Meja, Kursi & Papan Tulis">🪑 Meja, Kursi & Papan Tulis</option>
+                            <option value="❄️ Pintu, Jendela & AC/Kipas">❄️ Pintu, Jendela & AC/Kipas</option>
+                            <option value="📌 Pemasangan Kipas / Aksesoris Kelas">📌 Pemasangan Kipas / Aksesoris Kelas
+                            </option>
+                            <option value="🚰 Kebersihan & Toilet">🚰 Kebersihan & Toilet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rep-lokasi">Lokasi Detail Ruangan</label>
+                        <input type="text" id="rep-lokasi" placeholder="Contoh: Ruang X RPL 1 / Tembok Sisi Kanan"
+                            required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rep-deskripsi" id="label-deskripsi">Keterangan Kerusakan</label>
+                        <textarea id="rep-deskripsi" rows="3" placeholder="Jelaskan kondisi kerusakan secara singkat..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rep-foto" id="label-foto">Foto Bukti Kerusakan (Kamera / Galeri)</label>
+                        <input type="file" id="rep-foto" accept="image/*" capture="environment" required />
+                        <div id="photo-preview-box" class="photo-preview-box" style="display: none;">
+                            <img id="photo-preview-img" src="" alt="Preview Foto" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">🚀 Kirim Pengajuan Sekarang</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 2: TINDAK LANJUT ADMIN SARPRAS ================= -->
+        <div id="admin-modal" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-top">
+                    <h3>🛠️ Tindak Lanjut Petugas</h3>
+                    <button type="button" id="btn-close-admin" class="close-circle">✕</button>
+                </div>
+
+                <form id="admin-update-form">
+                    <input type="hidden" id="edit-report-id" />
+                    <div class="form-group">
+                        <label for="edit-status">Ubah Status Penanganan</label>
+                        <select id="edit-status" required>
+                            <option value="Menunggu">🟡 Menunggu Verifikasi</option>
+                            <option value="Diproses">🔵 Sedang Diperbaiki</option>
+                            <option value="Selesai">🟢 Selesai Diperbaiki</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-catatan">Catatan Petugas untuk Kelas</label>
+                        <textarea id="edit-catatan" rows="3"
+                            placeholder="Contoh: Teknisi sedang menuju kelas untuk mengganti kabel HDMI..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">💾 Simpan Perubahan Status</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 3: KELOLA PIN PRIVAT KELAS (KHUSUS ADMIN) ================= -->
+        <div id="pin-modal" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-top">
+                    <h3>🔑 Daftar PIN Privat Per Kelas</h3>
+                    <button type="button" id="btn-close-pin" class="close-circle">✕</button>
+                </div>
+                <p class="pin-helper-text">
+                    Bagikan PIN ini secara privat hanya kepada Ketua/Sekretaris kelas terkait. Klik <strong>Acak
+                        Ulang</strong> jika PIN bocor.
+                </p>
+                <div id="pin-list-container" class="pin-list-container"></div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- ================= MODAL 4: ZOOM FOTO LAYAR PENUH ================= -->
+    <div id="lightbox-modal" class="modal-overlay lightbox-overlay">
+        <button type="button" id="btn-close-lightbox" class="close-circle lightbox-close">✕</button>
+        <img id="lightbox-img" src="" alt="Zoom Foto Bukti" />
+    </div>
+
+    <!-- ================= NOTIFIKASI TOAST MELAYANG ================= -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Wajib ada DI ATAS script.js -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+<script src="script.js"></script>
+</body>
+
+</html>
