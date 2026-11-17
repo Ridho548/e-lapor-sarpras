@@ -20,7 +20,7 @@
                 <div class="app-badge">🏫 SMKN 1 DLANGGU</div>
                 <div class="logo-circle">🛠️</div>
                 <h1>E-Lapor Sarpras</h1>
-                <p>Pelaporan Kerusakan Fasilitas Berbasis Foto & Real-Time</p>
+                <p>Pelaporan Fasilitas & Buku Peminjaman Digital Real-Time</p>
             </div>
 
             <form id="login-form" class="card form-card">
@@ -32,18 +32,109 @@
                 <!-- Input Khusus Perwakilan Kelas -->
                 <div id="kelas-fields">
                     <div class="form-group">
-                        <label for="select-kelas">Pilih Akun Kelas</label>
+                        <label for="select-kelas">Pilih Jurusan & Akun Kelas / Lab</label>
+
+                        <!-- Filter Cepat Jurusan agar mudah dicari -->
+                        <div class="jurusan-filter-chips" id="jurusan-filter">
+                            <button type="button" class="jur-chip active" data-jur="ALL">Semua</button>
+                            <button type="button" class="jur-chip" data-jur="RPL">💻 RPL</button>
+                            <button type="button" class="jur-chip" data-jur="TKJ">🌐 TKJ</button>
+                            <button type="button" class="jur-chip" data-jur="DKV">🎨 DKV</button>
+                            <button type="button" class="jur-chip" data-jur="ANIM">🎬 ANIM</button>
+                            <button type="button" class="jur-chip" data-jur="TB">🍲 TB</button>
+                            <button type="button" class="jur-chip" data-jur="PHT">🏨 PHT</button>
+                            <button type="button" class="jur-chip" data-jur="LAB">🖥️ LAB</button>
+                        </div>
+
                         <select id="select-kelas">
-                            <option value="X RPL 1">X RPL 1 (Akun Resmi Kelas)</option>
-                            <option value="X RPL 2">X RPL 2 (Akun Resmi Kelas)</option>
-                            <option value="XI RPL 1">XI RPL 1 (Akun Resmi Kelas)</option>
-                            <option value="XI RPL 2">XI RPL 2 (Akun Resmi Kelas)</option>
-                            <option value="LAB JARKOM">LAB RPL</option>
+                            <optgroup label="💻 JURUSAN RPL (Rekayasa Perangkat Lunak)">
+                                <option value="X RPL 1">X RPL 1</option>
+                                <option value="X RPL 2">X RPL 2</option>
+                                <option value="X RPL 3">X RPL 3</option>
+                                <option value="XI RPL 1">XI RPL 1</option>
+                                <option value="XI RPL 2">XI RPL 2</option>
+                                <option value="XI RPL 3">XI RPL 3</option>
+                                <option value="XII RPL 1">XII RPL 1</option>
+                                <option value="XII RPL 2">XII RPL 2</option>
+                                <option value="XII RPL 3">XII RPL 3</option>
+                            </optgroup>
+
+                            <optgroup label="🌐 JURUSAN TKJ (Teknik Komputer & Jaringan)">
+                                <option value="X TKJ 1">X TKJ 1</option>
+                                <option value="X TKJ 2">X TKJ 2</option>
+                                <option value="X TKJ 3">X TKJ 3</option>
+                                <option value="XI TKJ 1">XI TKJ 1</option>
+                                <option value="XI TKJ 2">XI TKJ 2</option>
+                                <option value="XI TKJ 3">XI TKJ 3</option>
+                                <option value="XII TKJ 1">XII TKJ 1</option>
+                                <option value="XII TKJ 2">XII TKJ 2</option>
+                                <option value="XII TKJ 3">XII TKJ 3</option>
+                            </optgroup>
+
+                            <optgroup label="🎨 JURUSAN DKV (Desain Komunikasi Visual)">
+                                <option value="X DKV 1">X DKV 1</option>
+                                <option value="X DKV 2">X DKV 2</option>
+                                <option value="X DKV 3">X DKV 3</option>
+                                <option value="XI DKV 1">XI DKV 1</option>
+                                <option value="XI DKV 2">XI DKV 2</option>
+                                <option value="XI DKV 3">XI DKV 3</option>
+                                <option value="XII DKV 1">XII DKV 1</option>
+                                <option value="XII DKV 2">XII DKV 2</option>
+                                <option value="XII DKV 3">XII DKV 3</option>
+                            </optgroup>
+
+                            <optgroup label="🎬 JURUSAN ANIM (Animasi)">
+                                <option value="X ANIM 1">X ANIM 1</option>
+                                <option value="X ANIM 2">X ANIM 2</option>
+                                <option value="X ANIM 3">X ANIM 3</option>
+                                <option value="XI ANIM 1">XI ANIM 1</option>
+                                <option value="XI ANIM 2">XI ANIM 2</option>
+                                <option value="XI ANIM 3">XI ANIM 3</option>
+                                <option value="XII ANIM 1">XII ANIM 1</option>
+                                <option value="XII ANIM 2">XII ANIM 2</option>
+                                <option value="XII ANIM 3">XII ANIM 3</option>
+                            </optgroup>
+
+                            <optgroup label="🍲 JURUSAN TB (Tata Boga / Kuliner)">
+                                <option value="X TB 1">X TB 1</option>
+                                <option value="X TB 2">X TB 2</option>
+                                <option value="X TB 3">X TB 3</option>
+                                <option value="XI TB 1">XI TB 1</option>
+                                <option value="XI TB 2">XI TB 2</option>
+                                <option value="XI TB 3">XI TB 3</option>
+                                <option value="XII TB 1">XII TB 1</option>
+                                <option value="XII TB 2">XII TB 2</option>
+                                <option value="XII TB 3">XII TB 3</option>
+                            </optgroup>
+
+                            <optgroup label="🏨 JURUSAN PHT (Perhotelan)">
+                                <option value="X PHT 1">X PHT 1</option>
+                                <option value="X PHT 2">X PHT 2</option>
+                                <option value="X PHT 3">X PHT 3</option>
+                                <option value="XI PHT 1">XI PHT 1</option>
+                                <option value="XI PHT 2">XI PHT 2</option>
+                                <option value="XI PHT 3">XI PHT 3</option>
+                                <option value="XII PHT 1">XII PHT 1</option>
+                                <option value="XII PHT 2">XII PHT 2</option>
+                                <option value="XII PHT 3">XII PHT 3</option>
+                            </optgroup>
+
+                            <optgroup label="🖥️ RUANG LABORATORIUM">
+                                <option value="LAB RPL 1">LAB RPL 1</option>
+                                <option value="LAB RPL 2">LAB RPL 2</option>
+                                <option value="LAB TKJ 1">LAB TKJ 1</option>
+                                <option value="LAB TKJ 2">LAB TKJ 2</option>
+                                <option value="LAB DKV 1">LAB DKV 1</option>
+                                <option value="LAB DKV 2">LAB DKV 2</option>
+                                <option value="LAB ANIM 1">LAB ANIM 1</option>
+                                <option value="LAB ANIM 2">LAB ANIM 2</option>
+                                <option value="LAB INFORMATIKA KONG NDO">LAB INFORMATIKA KONG NDO</option>
+                            </optgroup>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="input-pj">Nama Penginput (Ketua / Sekretaris)</label>
+                        <label for="input-pj">Nama Penginput / Siswa</label>
                         <input type="text" id="input-pj" placeholder="Contoh: Ahmad Fauzi" />
                     </div>
                 </div>
@@ -66,7 +157,7 @@
                 <button type="submit" class="btn btn-primary btn-full">Masuk ke Aplikasi ➔</button>
             </form>
 
-            <p class="footer-note">1 Kelas memiliki 1 PIN privat berbeda untuk mencegah laporan ganda.</p>
+            <p class="footer-note">1 Kelas memiliki 1 PIN privat berbeda untuk menjaga keamanan data.</p>
         </section>
 
         <!-- ================= HALAMAN 2: DASHBOARD UTAMA ================= -->
@@ -80,15 +171,19 @@
                 <button id="btn-logout" class="btn-icon" title="Keluar Akun">Keluar</button>
             </header>
 
-            <!-- Kolom Pencarian Cepat (Posisi Paling Atas) -->
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="🔍 Cari kelas, ruangan, atau kategori..." />
+            <!-- Navigasi Tab Fitur Utama -->
+            <div class="feature-tabs">
+                <button type="button" class="feature-tab active" data-tab="lapor">🛠️ Lapor Fasilitas</button>
+                <button type="button" class="feature-tab" data-tab="pinjam">📦 Peminjaman Barang</button>
             </div>
 
-            <!-- Ringkasan Status Real-Time -->
-            <div class="stats-grid">
+            <!-- Kolom Pencarian Cepat -->
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Cari kelas, ruangan, barang, atau nama siswa..." />
+            </div>
 
-                <!-- Ringkasan Status Real-Time -->
+            <!-- ================= PANEL TAB 1: LAPOR FASILITAS ================= -->
+            <div id="tab-lapor-content">
                 <div class="stats-grid">
                     <div class="stat-card warning">
                         <span class="stat-num" id="stat-menunggu">0</span>
@@ -104,11 +199,11 @@
                     </div>
                 </div>
 
-                <!-- Area Tombol Aksi (Otomatis berganti antara Kelas & Admin) -->
+                <!-- Area Tombol Aksi Laporan -->
                 <div id="kelas-action-bar" class="action-bar"></div>
 
-                <!-- Filter Status -->
-                <div class="filter-bar">
+                <!-- Filter Status Laporan -->
+                <div class="filter-bar" id="report-filter-bar">
                     <button class="chip active" data-status="ALL">Semua</button>
                     <button class="chip" data-status="Menunggu">Menunggu</button>
                     <button class="chip" data-status="Diproses">Diproses</button>
@@ -116,12 +211,46 @@
                 </div>
 
                 <!-- Daftar Tiket Laporan -->
-                <div class="feed-header">
+                <div class="feed-header" id="report-feed-header">
                     <h3>📋 Daftar Laporan Real-Time</h3>
                 </div>
                 <div id="report-list" class="report-list"></div>
-        </section>
+            </div>
 
+            <!-- ================= PANEL TAB 2: PEMINJAMAN BARANG SARPRAS ================= -->
+            <div id="tab-pinjam-content" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card warning">
+                        <span class="stat-num" id="stat-loan-dipinjam">0</span>
+                        <span class="stat-label">Sedang Dipinjam</span>
+                    </div>
+                    <div class="stat-card success">
+                        <span class="stat-num" id="stat-loan-kembali">0</span>
+                        <span class="stat-label">Dikembalikan</span>
+                    </div>
+                    <div class="stat-card info">
+                        <span class="stat-num" id="stat-loan-total">0</span>
+                        <span class="stat-label">Total Transaksi</span>
+                    </div>
+                </div>
+
+                <!-- Area Tombol Aksi Peminjaman -->
+                <div id="loan-action-bar" class="action-bar"></div>
+
+                <!-- Filter Status Peminjaman -->
+                <div class="filter-bar" id="loan-filter-bar">
+                    <button class="chip loan-chip active" data-loan-status="ALL">Semua</button>
+                    <button class="chip loan-chip" data-loan-status="Dipinjam">🟡 Sedang Dipinjam</button>
+                    <button class="chip loan-chip" data-loan-status="Dikembalikan">🟢 Sudah Dikembalikan</button>
+                </div>
+
+                <!-- Daftar Buku Peminjaman -->
+                <div class="feed-header" id="loan-feed-header">
+                    <h3>📦 Buku Peminjaman Sarpras</h3>
+                </div>
+                <div id="loan-list" class="report-list"></div>
+            </div>
+        </section>
 
         <!-- ================= MODAL 1: FORM BUAT LAPORAN (FOTO KAMERA) ================= -->
         <div id="form-modal" class="modal-overlay">
@@ -223,10 +352,149 @@
             </div>
         </div>
 
-    </div>
+        <!-- ================= MODAL 4: FORM PEMINJAMAN BARANG SARPRAS (MULTI-PILIHAN + TTD) ================= -->
+        <div id="loan-modal" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-top">
+                    <h3>📦 Form Peminjaman Sarpras</h3>
+                    <button type="button" id="btn-close-loan" class="close-circle">✕</button>
+                </div>
+
+                <form id="loan-form">
+                    <div class="time-stamp-box">
+                        <small>🕒 Waktu Peminjaman (Hari, Tanggal, Bulan, Tahun & Jam):</small>
+                        <strong id="loan-borrow-time-display">-</strong>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan-nama">Nama Lengkap Siswa Peminjam</label>
+                        <input type="text" id="loan-nama" placeholder="Masukkan nama lengkap siswa..." required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan-kelas">Kelas Peminjam</label>
+                        <input type="text" id="loan-kelas" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pilih Barang yang Dipinjam (Bisa Centang Lebih dari 1)</label>
+                        <div class="item-checklist-grid">
+                            <label class="check-card">
+                                <input type="checkbox" class="loan-item-check" value="Proyektor (Include Kabel HDMI)" />
+                                <span>📽️ Proyektor (Include Kabel HDMI)</span>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" class="loan-item-check" value="Stop Kontak" />
+                                <span>⚡ Stop Kontak / Kabel Roll</span>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" class="loan-item-check" value="Kabel HDMI" />
+                                <span>🔌 Kabel HDMI (Tambahan)</span>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" class="loan-item-check" value="Bola Voli" />
+                                <span>🏐 Bola Voli</span>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" class="loan-item-check" value="Bola Futsal" />
+                                <span>⚽ Bola Futsal</span>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" class="loan-item-check" value="Speaker Portable" />
+                                <span>🔊 Speaker Portable / Mic</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan-barang-custom">Tambahan Barang Lainnya (Opsional)</label>
+                        <input type="text" id="loan-barang-custom"
+                            placeholder="Ketik jika ada tambahan lain (misal: Peluit / Kamera)..." />
+                    </div>
+
+                    <div class="combined-preview-box">
+                        <small>📝 Tertulis di Catatan Sarpras:</small>
+                        <strong id="loan-combined-preview">- Pilih atau ketik barang di atas -</strong>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan-keperluan">Keperluan / Mata Pelajaran</label>
+                        <input type="text" id="loan-keperluan" placeholder="Contoh: Presentasi Produktif RPL / Olahraga"
+                            required />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="sig-label-row">
+                            <label>✍️ Tanda Tangan Siswa Peminjam</label>
+                            <button type="button" id="btn-clear-sig-borrow" class="btn-clear-sig">🔄 Hapus TTD</button>
+                        </div>
+                        <div class="sig-canvas-wrap">
+                            <canvas id="sig-canvas-borrow" width="380" height="140"></canvas>
+                        </div>
+                        <small class="sig-hint">Goreskan tanda tangan di kotak putih di atas menggunakan jari atau
+                            mouse.</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">📝 Simpan Catatan Peminjaman</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 5: FORM PENGEMBALIAN BARANG SARPRAS ================= -->
+        <div id="return-modal" class="modal-overlay">
+            <div class="modal-sheet">
+                <div class="modal-top">
+                    <h3>✅ Pengembalian Barang Sarpras</h3>
+                    <button type="button" id="btn-close-return" class="close-circle">✕</button>
+                </div>
+
+                <form id="return-form">
+                    <input type="hidden" id="return-loan-id" />
+
+                    <div id="return-item-summary" class="return-summary-box"></div>
+
+                    <div class="time-stamp-box">
+                        <small>🕒 Waktu Pengembalian (Hari, Tanggal, Bulan, Tahun & Jam):</small>
+                        <strong id="loan-return-time-display">-</strong>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return-nama">Nama Siswa yang Mengembalikan</label>
+                        <input type="text" id="return-nama" placeholder="Nama lengkap siswa pengembali..." required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return-kelas">Kelas Pengembali</label>
+                        <input type="text" id="return-kelas" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return-kondisi">Kondisi Barang Saat Dikembalikan</label>
+                        <select id="return-kondisi" required>
+                            <option value="Baik & Lengkap">🟢 Baik & Lengkap</option>
+                            <option value="Ada Kendala / Kerusakan Ringan">🟡 Ada Kendala / Kerusakan Ringan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="sig-label-row">
+                            <label>✍️ Tanda Tangan Siswa Pengembali</label>
+                            <button type="button" id="btn-clear-sig-return" class="btn-clear-sig">🔄 Hapus TTD</button>
+                        </div>
+                        <div class="sig-canvas-wrap">
+                            <canvas id="sig-canvas-return" width="380" height="140"></canvas>
+                        </div>
+                        <small class="sig-hint">Tanda tangan bukti barang telah dikembalikan ke ruang Sarpras.</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">✅ Konfirmasi Pengembalian Barang</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
-    <!-- ================= MODAL 4: ZOOM FOTO LAYAR PENUH ================= -->
+    <!-- ================= MODAL 6: ZOOM FOTO LAYAR PENUH ================= -->
     <div id="lightbox-modal" class="modal-overlay lightbox-overlay">
         <button type="button" id="btn-close-lightbox" class="close-circle lightbox-close">✕</button>
         <img id="lightbox-img" src="" alt="Zoom Foto Bukti" />
@@ -239,10 +507,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script src="script.js"></script>
-</body>
-
-</html>
-<script src="script.js"></script>
 </body>
 
 </html>
