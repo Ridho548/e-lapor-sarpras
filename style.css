@@ -1295,3 +1295,23 @@ select optgroup {
 .picker-item-btn.full-span {
   grid-column: span 2;
 }
+
+/* Perbaikan agar modal pilih kelas bisa menutup saat kelas atau tombol X diklik */
+.kelas-picker-overlay {
+  display: none !important;
+}
+
+.kelas-picker-overlay.active {
+  display: flex !important;
+}
+
+/* Efek Hover & Sentuh pada Tombol Kelas (Gradasi Ungu-Biru + Bingkai Emas) */
+.picker-item-btn:hover,
+.picker-item-btn:active {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  border-color: #fbbf24;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.55);
+  transform: translateY(-2px);
+}
