@@ -32,105 +32,16 @@
                 <!-- Input Khusus Perwakilan Kelas -->
                 <div id="kelas-fields">
                     <div class="form-group">
-                        <label for="select-kelas">Pilih Jurusan & Akun Kelas / Lab</label>
+                        <label>Akun Kelas / Ruang Lab</label>
+                        <input type="hidden" id="select-kelas" value="X RPL 1" />
 
-                        <!-- Filter Cepat Jurusan agar mudah dicari -->
-                        <div class="jurusan-filter-chips" id="jurusan-filter">
-                            <button type="button" class="jur-chip active" data-jur="ALL">Semua</button>
-                            <button type="button" class="jur-chip" data-jur="RPL">💻 RPL</button>
-                            <button type="button" class="jur-chip" data-jur="TKJ">🌐 TKJ</button>
-                            <button type="button" class="jur-chip" data-jur="DKV">🎨 DKV</button>
-                            <button type="button" class="jur-chip" data-jur="ANIM">🎬 ANIM</button>
-                            <button type="button" class="jur-chip" data-jur="TB">🍲 TB</button>
-                            <button type="button" class="jur-chip" data-jur="PHT">🏨 PHT</button>
-                            <button type="button" class="jur-chip" data-jur="LAB">🖥️ LAB</button>
-                        </div>
-
-                        <select id="select-kelas">
-                            <optgroup label="💻 JURUSAN RPL (Rekayasa Perangkat Lunak)">
-                                <option value="X RPL 1">X RPL 1</option>
-                                <option value="X RPL 2">X RPL 2</option>
-                                <option value="X RPL 3">X RPL 3</option>
-                                <option value="XI RPL 1">XI RPL 1</option>
-                                <option value="XI RPL 2">XI RPL 2</option>
-                                <option value="XI RPL 3">XI RPL 3</option>
-                                <option value="XII RPL 1">XII RPL 1</option>
-                                <option value="XII RPL 2">XII RPL 2</option>
-                                <option value="XII RPL 3">XII RPL 3</option>
-                            </optgroup>
-
-                            <optgroup label="🌐 JURUSAN TKJ (Teknik Komputer & Jaringan)">
-                                <option value="X TKJ 1">X TKJ 1</option>
-                                <option value="X TKJ 2">X TKJ 2</option>
-                                <option value="X TKJ 3">X TKJ 3</option>
-                                <option value="XI TKJ 1">XI TKJ 1</option>
-                                <option value="XI TKJ 2">XI TKJ 2</option>
-                                <option value="XI TKJ 3">XI TKJ 3</option>
-                                <option value="XII TKJ 1">XII TKJ 1</option>
-                                <option value="XII TKJ 2">XII TKJ 2</option>
-                                <option value="XII TKJ 3">XII TKJ 3</option>
-                            </optgroup>
-
-                            <optgroup label="🎨 JURUSAN DKV (Desain Komunikasi Visual)">
-                                <option value="X DKV 1">X DKV 1</option>
-                                <option value="X DKV 2">X DKV 2</option>
-                                <option value="X DKV 3">X DKV 3</option>
-                                <option value="XI DKV 1">XI DKV 1</option>
-                                <option value="XI DKV 2">XI DKV 2</option>
-                                <option value="XI DKV 3">XI DKV 3</option>
-                                <option value="XII DKV 1">XII DKV 1</option>
-                                <option value="XII DKV 2">XII DKV 2</option>
-                                <option value="XII DKV 3">XII DKV 3</option>
-                            </optgroup>
-
-                            <optgroup label="🎬 JURUSAN ANIM (Animasi)">
-                                <option value="X ANIM 1">X ANIM 1</option>
-                                <option value="X ANIM 2">X ANIM 2</option>
-                                <option value="X ANIM 3">X ANIM 3</option>
-                                <option value="XI ANIM 1">XI ANIM 1</option>
-                                <option value="XI ANIM 2">XI ANIM 2</option>
-                                <option value="XI ANIM 3">XI ANIM 3</option>
-                                <option value="XII ANIM 1">XII ANIM 1</option>
-                                <option value="XII ANIM 2">XII ANIM 2</option>
-                                <option value="XII ANIM 3">XII ANIM 3</option>
-                            </optgroup>
-
-                            <optgroup label="🍲 JURUSAN TB (Tata Boga / Kuliner)">
-                                <option value="X TB 1">X TB 1</option>
-                                <option value="X TB 2">X TB 2</option>
-                                <option value="X TB 3">X TB 3</option>
-                                <option value="XI TB 1">XI TB 1</option>
-                                <option value="XI TB 2">XI TB 2</option>
-                                <option value="XI TB 3">XI TB 3</option>
-                                <option value="XII TB 1">XII TB 1</option>
-                                <option value="XII TB 2">XII TB 2</option>
-                                <option value="XII TB 3">XII TB 3</option>
-                            </optgroup>
-
-                            <optgroup label="🏨 JURUSAN PHT (Perhotelan)">
-                                <option value="X PHT 1">X PHT 1</option>
-                                <option value="X PHT 2">X PHT 2</option>
-                                <option value="X PHT 3">X PHT 3</option>
-                                <option value="XI PHT 1">XI PHT 1</option>
-                                <option value="XI PHT 2">XI PHT 2</option>
-                                <option value="XI PHT 3">XI PHT 3</option>
-                                <option value="XII PHT 1">XII PHT 1</option>
-                                <option value="XII PHT 2">XII PHT 2</option>
-                                <option value="XII PHT 3">XII PHT 3</option>
-                            </optgroup>
-
-                            <optgroup label="🖥️ RUANG LABORATORIUM">
-                                <option value="LAB RPL 1">LAB RPL 1</option>
-                                <option value="LAB RPL 2">LAB RPL 2</option>
-                                <option value="LAB TKJ 1">LAB TKJ 1</option>
-                                <option value="LAB TKJ 2">LAB TKJ 2</option>
-                                <option value="LAB DKV 1">LAB DKV 1</option>
-                                <option value="LAB DKV 2">LAB DKV 2</option>
-                                <option value="LAB ANIM 1">LAB ANIM 1</option>
-                                <option value="LAB ANIM 2">LAB ANIM 2</option>
-                                <option value="LAB INFORMATIKA KONG NDO">LAB INFORMATIKA KONG NDO</option>
-                            </optgroup>
-                        </select>
+                        <button type="button" id="btn-open-kelas-picker" class="kelas-trigger-btn">
+                            <span class="trigger-left">
+                                <span class="trigger-icon">🏫</span>
+                                <span id="selected-kelas-label">X RPL 1</span>
+                            </span>
+                            <span class="trigger-arrow">▾</span>
+                        </button>
                     </div>
 
                     <div class="form-group">
@@ -492,6 +403,32 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- ================= MODAL PILIH KELAS & LAB (CUSTOM DARK THEME) ================= -->
+    <div id="kelas-picker-modal" class="modal-overlay kelas-picker-overlay">
+        <div class="kelas-picker-sheet">
+            <div class="modal-top">
+                <h3>🏫 Pilih Kelas / Lab</h3>
+                <button type="button" id="btn-close-kelas-picker" class="close-circle">✕</button>
+            </div>
+
+            <input type="text" id="kelas-search-input" class="kelas-search-input"
+                placeholder="🔍 Ketik kelas/lab (misal: XI RPL 2 atau LAB)..." />
+
+            <div class="jurusan-filter-chips" id="picker-jur-filter">
+                <button type="button" class="jur-chip active" data-jur="ALL">Semua</button>
+                <button type="button" class="jur-chip" data-jur="RPL">💻 RPL</button>
+                <button type="button" class="jur-chip" data-jur="TKJ">🌐 TKJ</button>
+                <button type="button" class="jur-chip" data-jur="DKV">🎨 DKV</button>
+                <button type="button" class="jur-chip" data-jur="ANIM">🎬 ANIM</button>
+                <button type="button" class="jur-chip" data-jur="TB">🍲 TB</button>
+                <button type="button" class="jur-chip" data-jur="PHT">🏨 PHT</button>
+                <button type="button" class="jur-chip" data-jur="LAB">🖥️ LAB</button>
+            </div>
+
+            <div id="kelas-picker-list" class="kelas-picker-list"></div>
+        </div>
     </div>
 
     <!-- ================= MODAL 6: ZOOM FOTO LAYAR PENUH ================= -->

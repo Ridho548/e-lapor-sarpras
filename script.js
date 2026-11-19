@@ -1092,46 +1092,101 @@ function renderLoans() {
         .join("");
 }
 
-// ================= FILTER CEPAT JURUSAN / LAB DI HALAMAN LOGIN =================
-const selectKelasEl = document.getElementById("select-kelas");
-const jurChips = document.querySelectorAll(".jur-chip");
+// ================= CUSTOM MODAL PICKER KELAS & LAB (DARK THEME) =================
+const selectKelasInput = document.getElementById("select-kelas");
+const btnOpenKelasPicker = document.getElementById("btn-open-kelas-picker");
+const selectedKelasLabel = document.getElementById("selected-kelas-label");
+const kelasPickerModal = document.getElementById("kelas-picker-modal");
+const btnCloseKelasPicker = document.getElementById("btn-close-kelas-picker");
+const kelasSearchInput = document.getElementById("kelas-search-input");
+const kelasPickerList = document.getElementById("kelas-picker-list");
+const pickerJurChips = document.querySelectorAll("#picker-jur-filter .jur-chip");
 
-if (selectKelasEl && jurChips.length > 0) {
-    const originalGroups = Array.from(selectKelasEl.querySelectorAll("optgroup")).map((grp) => ({
-        label: grp.label,
-        options: Array.from(grp.querySelectorAll("option")).map((opt) => ({
-            value: opt.value,
-            text: opt.textContent
-        }))
-    }));
+const kelasGroupsData = [
+    { key: "RPL", title: "💻 Jurusan RPL", items: ["X RPL 1", "X RPL 2", "X RPL 3", "XI RPL 1", "XI RPL 2", "XI RPL 3", "XII RPL 1", "XII RPL 2", "XII RPL 3"] },
+    { key: "TKJ", title: "🌐 Jurusan TKJ", items: ["X TKJ 1", "X TKJ 2", "X TKJ 3", "XI TKJ 1", "XI TKJ 2", "XI TKJ 3", "XII TKJ 1", "XII TKJ 2", "XII TKJ 3"] },
+    { key: "DKV", title: "🎨 Jurusan DKV", items: ["X DKV 1", "X DKV 2", "X DKV 3", "XI DKV 1", "XI DKV 2", "XI DKV 3", "XII DKV 1", "XII DKV 2", "XII DKV 3"] },
+    { key: "ANIM", title: "🎬 Jurusan ANIM", items: ["X ANIM 1", "X ANIM 2", "X ANIM 3", "XI ANIM 1", "XI ANIM 2", "XI ANIM 3", "XII ANIM 1", "XII ANIM 2", "XII ANIM 3"] },
+    { key: "TB", title: "🍲 Jurusan TB", items: ["X TB 1", "X TB 2", "X TB 3", "XI TB 1", "XI TB 2", "XI TB 3", "XII TB 1", "XII TB 2", "XII TB 3"] },
+    { key: "PHT", title: "🏨 Jurusan PHT", items: ["X PHT 1", "X PHT 2", "X PHT 3", "XI PHT 1", "XI PHT 2", "XI PHT 3", "XII PHT 1", "XII PHT 2", "XII PHT 3"] },
+    { key: "LAB", title: "🖥️ Ruang Laboratorium", isLab: true, items: ["LAB RPL 1", "LAB RPL 2", "LAB TKJ 1", "LAB TKJ 2", "LAB DKV 1", "LAB DKV 2", "LAB ANIM 1", "LAB ANIM 2", "LAB INFORMATIKA KONG NDO"] }
+];
 
-    jurChips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-            jurChips.forEach((c) => c.classList.remove("active"));
-            chip.classList.add("active");
+let activeJurFilter = "ALL";
+let kelasSearchQuery = "";
 
-            const filterKey = chip.dataset.jur;
-            selectKelasEl.innerHTML = "";
+function renderKelasPicker() {
+    if (!kelasPickerList) return;
+    const currentVal = selectKelasInput ? selectKelasInput.value : "X RPL 1";
 
-            originalGroups.forEach((grp) => {
-                const matchedOptions = grp.options.filter((opt) => {
-                    if (filterKey === "ALL") return true;
-                    if (filterKey === "LAB") return opt.value.startsWith("LAB ");
-                    return opt.value.includes(` ${filterKey} `);
-                });
+    const html = kelasGroupsData
+        .filter((grp) => activeJurFilter === "ALL" || grp.key === activeJurFilter)
+        .map((grp) => {
+            const matchedItems = grp.items.filter((item) =>
+                item.toLowerCase().includes(kelasSearchQuery)
+            );
+            if (matchedItems.length === 0) return "";
 
-                if (matchedOptions.length > 0) {
-                    const optGroupEl = document.createElement("optgroup");
-                    optGroupEl.label = grp.label;
-                    matchedOptions.forEach((opt) => {
-                        const optionEl = document.createElement("option");
-                        optionEl.value = opt.value;
-                        optionEl.textContent = opt.text;
-                        optGroupEl.appendChild(optionEl);
-                    });
-                    selectKelasEl.appendChild(optGroupEl);
-                }
-            });
+            const buttonsHtml = matchedItems
+                .map((item) => {
+                    const isSelected = item === currentVal ? "selected" : "";
+                    const isFullSpan = item.length > 16 ? "full-span" : "";
+                    return `<button type="button" class="picker-item-btn ${isSelected} ${isFullSpan}" data-value="${item}">${item}</button>`;
+                })
+                .join("");
+
+            return `
+                <div>
+                    <div class="picker-group-title">${grp.title}</div>
+                    <div class="picker-grid ${grp.isLab ? "lab-grid" : ""}">${buttonsHtml}</div>
+                </div>
+            `;
+        })
+        .join("");
+
+    kelasPickerList.innerHTML = html || `<div class="empty-state">Kelas atau Lab tidak ditemukan.</div>`;
+
+    kelasPickerList.querySelectorAll(".picker-item-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const chosen = btn.dataset.value;
+            if (selectKelasInput) selectKelasInput.value = chosen;
+            if (selectedKelasLabel) selectedKelasLabel.textContent = chosen;
+            kelasPickerModal.classList.remove("active");
         });
+    });
+}
+
+if (btnOpenKelasPicker && kelasPickerModal) {
+    btnOpenKelasPicker.addEventListener("click", () => {
+        kelasSearchQuery = "";
+        if (kelasSearchInput) kelasSearchInput.value = "";
+        renderKelasPicker();
+        kelasPickerModal.classList.add("active");
+    });
+}
+
+if (btnCloseKelasPicker) {
+    btnCloseKelasPicker.addEventListener("click", () => kelasPickerModal.classList.remove("active"));
+}
+
+if (kelasPickerModal) {
+    kelasPickerModal.addEventListener("click", (e) => {
+        if (e.target === kelasPickerModal) kelasPickerModal.classList.remove("active");
+    });
+}
+
+pickerJurChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+        pickerJurChips.forEach((c) => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeJurFilter = chip.dataset.jur;
+        renderKelasPicker();
+    });
+});
+
+if (kelasSearchInput) {
+    kelasSearchInput.addEventListener("input", (e) => {
+        kelasSearchQuery = e.target.value.toLowerCase().trim();
+        renderKelasPicker();
     });
 }
